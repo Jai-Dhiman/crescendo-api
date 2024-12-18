@@ -17,7 +17,6 @@ public class MusicalPieceDTO {
     this.savedAnnotations = savedAnnotations;
   }
 
-  // Getters and Setters
   public Long getId() {
     return id;
   }

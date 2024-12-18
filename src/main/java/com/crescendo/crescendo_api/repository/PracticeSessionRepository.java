@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PracticeSessionRepository extends JpaRepository<PracticeSession, Long> {
-  // Find practice sessions for a specific piece
   List<PracticeSession> findByMusicalPieceId(Long musicalPieceId);
 }

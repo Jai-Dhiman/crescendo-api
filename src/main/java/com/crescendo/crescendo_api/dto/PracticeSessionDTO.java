@@ -1,27 +1,24 @@
-package com.crescendo.crescendo_api.model;
+package com.crescendo.crescendo_api.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "practice_sessions")
-public class PracticeSession {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PracticeSessionDTO {
   private Long id;
-
-  @Column(nullable = false)
-  private Integer duration; // in minutes
-
-  @Column(nullable = false)
+  private Integer duration;
   private LocalDateTime dateTime;
-
-  @Column(columnDefinition = "TEXT")
   private String notes;
+  private Long musicalPieceId;
 
-  @ManyToOne
-  @JoinColumn(name = "musical_piece_id", nullable = false)
-  private MusicalPiece musicalPiece;
+  public PracticeSessionDTO() {
+  }
+
+  public PracticeSessionDTO(Long id, Integer duration, LocalDateTime dateTime, String notes, Long musicalPieceId) {
+    this.id = id;
+    this.duration = duration;
+    this.dateTime = dateTime;
+    this.notes = notes;
+    this.musicalPieceId = musicalPieceId;
+  }
 
   public Long getId() {
     return id;
@@ -55,11 +52,11 @@ public class PracticeSession {
     this.notes = notes;
   }
 
-  public MusicalPiece getMusicalPiece() {
-    return musicalPiece;
+  public Long getMusicalPieceId() {
+    return musicalPieceId;
   }
 
-  public void setMusicalPiece(MusicalPiece musicalPiece) {
-    this.musicalPiece = musicalPiece;
+  public void setMusicalPieceId(Long musicalPieceId) {
+    this.musicalPieceId = musicalPieceId;
   }
 }

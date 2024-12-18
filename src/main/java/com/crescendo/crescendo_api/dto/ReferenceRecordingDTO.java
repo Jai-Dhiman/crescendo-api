@@ -1,29 +1,25 @@
-package com.crescendo.crescendo_api.model;
+package com.crescendo.crescendo_api.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "reference_recordings")
-public class ReferenceRecording {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReferenceRecordingDTO {
   private Long id;
-
-  @Column(name = "spotify_track_id", nullable = false)
   private String spotifyTrackId;
-
-  @Column(nullable = false)
   private String artistName;
-
-  @Column(nullable = false)
   private String recordingTitle;
-
-  @Column(columnDefinition = "TEXT")
   private String notes;
+  private Long musicalPieceId;
 
-  @ManyToOne
-  @JoinColumn(name = "musical_piece_id", nullable = false)
-  private MusicalPiece musicalPiece;
+  public ReferenceRecordingDTO() {
+  }
+
+  public ReferenceRecordingDTO(Long id, String spotifyTrackId, String artistName,
+      String recordingTitle, String notes, Long musicalPieceId) {
+    this.id = id;
+    this.spotifyTrackId = spotifyTrackId;
+    this.artistName = artistName;
+    this.recordingTitle = recordingTitle;
+    this.notes = notes;
+    this.musicalPieceId = musicalPieceId;
+  }
 
   public Long getId() {
     return id;
@@ -65,11 +61,11 @@ public class ReferenceRecording {
     this.notes = notes;
   }
 
-  public MusicalPiece getMusicalPiece() {
-    return musicalPiece;
+  public Long getMusicalPieceId() {
+    return musicalPieceId;
   }
 
-  public void setMusicalPiece(MusicalPiece musicalPiece) {
-    this.musicalPiece = musicalPiece;
+  public void setMusicalPieceId(Long musicalPieceId) {
+    this.musicalPieceId = musicalPieceId;
   }
 }

@@ -2,7 +2,6 @@ package com.crescendo.crescendo_api.controller;
 
 import com.crescendo.crescendo_api.dto.MusicalPieceDTO;
 import com.crescendo.crescendo_api.service.MusicalPieceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ public class MusicalPieceController {
 
   private final MusicalPieceService musicalPieceService;
 
-  @Autowired
   public MusicalPieceController(MusicalPieceService musicalPieceService) {
     this.musicalPieceService = musicalPieceService;
   }

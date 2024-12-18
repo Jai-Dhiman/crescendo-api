@@ -3,7 +3,6 @@ package com.crescendo.crescendo_api.service;
 import com.crescendo.crescendo_api.dto.MusicalPieceDTO;
 import com.crescendo.crescendo_api.model.MusicalPiece;
 import com.crescendo.crescendo_api.repository.MusicalPieceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +15,6 @@ public class MusicalPieceService {
 
   private final MusicalPieceRepository musicalPieceRepository;
 
-  @Autowired
   public MusicalPieceService(MusicalPieceRepository musicalPieceRepository) {
     this.musicalPieceRepository = musicalPieceRepository;
   }
