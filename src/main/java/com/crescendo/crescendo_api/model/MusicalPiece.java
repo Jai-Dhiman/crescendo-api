@@ -29,4 +29,35 @@ public class MusicalPiece {
   @OneToMany(mappedBy = "musicalPiece", cascade = CascadeType.ALL)
   private Set<ReferenceRecording> referenceRecordings = new HashSet<>();
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getPdfFilePath() {
+    return pdfFilePath;
+  }
+
+  public void setPdfFilePath(String pdfFilePath) {
+    this.pdfFilePath = pdfFilePath;
+  }
+
+  public String getSavedAnnotations() {
+    return savedAnnotations;
+  }
+
+  public void setSavedAnnotations(String savedAnnotations) {
+    this.savedAnnotations = savedAnnotations;
+  }
 }
