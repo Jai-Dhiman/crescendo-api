@@ -1,47 +1,42 @@
 package com.crescendo.crescendo_api.controller;
 
-import com.crescendo.crescendo_api.dto.MusicalPieceDTO;
+import com.crescendo.crescendo_api.model.MusicalPiece;
 import com.crescendo.crescendo_api.service.MusicalPieceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/musical-pieces")
+@RequestMapping("/api/pieces")
+@RequiredArgsConstructor
 public class MusicalPieceController {
-
   private final MusicalPieceService musicalPieceService;
 
-  public MusicalPieceController(MusicalPieceService musicalPieceService) {
-    this.musicalPieceService = musicalPieceService;
-  }
-
-  @PostMapping
-  public ResponseEntity<MusicalPieceDTO> createMusicalPiece(@RequestBody MusicalPieceDTO musicalPieceDTO) {
-    return ResponseEntity.ok(musicalPieceService.createMusicalPiece(musicalPieceDTO));
+  @GetMapping
+  public ResponseEntity<List<MusicalPiece>> getAllPieces() {
+    return ResponseEntity.ok(musicalPieceService.getAllPieces());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<MusicalPieceDTO> getMusicalPiece(@PathVariable Long id) {
-    return ResponseEntity.ok(musicalPieceService.getMusicalPiece(id));
+  public ResponseEntity<MusicalPiece> getPiece(@PathVariable Long id) {
+    return ResponseEntity.ok(musicalPieceService.getPieceById(id));
   }
 
-  @GetMapping
-  public ResponseEntity<List<MusicalPieceDTO>> getAllMusicalPieces() {
-    return ResponseEntity.ok(musicalPieceService.getAllMusicalPieces());
+  @PostMapping
+  public ResponseEntity<MusicalPiece> createPiece(@RequestBody MusicalPiece piece) {
+    return ResponseEntity.ok(musicalPieceService.createPiece(piece));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<MusicalPieceDTO> updateMusicalPiece(
-      @PathVariable Long id,
-      @RequestBody MusicalPieceDTO musicalPieceDTO) {
-    return ResponseEntity.ok(musicalPieceService.updateMusicalPiece(id, musicalPieceDTO));
+  public ResponseEntity<MusicalPiece> updatePiece(@PathVariable Long id, @RequestBody MusicalPiece piece) {
+    return ResponseEntity.ok(musicalPieceService.updatePiece(id, piece));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteMusicalPiece(@PathVariable Long id) {
-    musicalPieceService.deleteMusicalPiece(id);
+  public ResponseEntity<Void> deletePiece(@PathVariable Long id) {
+    musicalPieceService.deletePiece(id);
     return ResponseEntity.noContent().build();
   }
 }

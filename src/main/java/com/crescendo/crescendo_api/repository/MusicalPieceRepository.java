@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MusicalPieceRepository extends JpaRepository<MusicalPiece, Long> {
-  // Basic CRUD operations are automatically provided
-  // Custom queries can be added here
 }

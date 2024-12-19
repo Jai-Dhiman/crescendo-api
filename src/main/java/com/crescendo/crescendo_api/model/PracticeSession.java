@@ -1,65 +1,21 @@
 package com.crescendo.crescendo_api.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
-@Table(name = "practice_sessions")
+@NoArgsConstructor
 public class PracticeSession {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  @Column(nullable = false)
-  private Integer duration; // in minutes
-
-  @Column(nullable = false)
   private LocalDateTime dateTime;
-
-  @Column(columnDefinition = "TEXT")
+  private Integer duration;
   private String notes;
-
   @ManyToOne
-  @JoinColumn(name = "musical_piece_id", nullable = false)
-  private MusicalPiece musicalPiece;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Integer getDuration() {
-    return duration;
-  }
-
-  public void setDuration(Integer duration) {
-    this.duration = duration;
-  }
-
-  public LocalDateTime getDateTime() {
-    return dateTime;
-  }
-
-  public void setDateTime(LocalDateTime dateTime) {
-    this.dateTime = dateTime;
-  }
-
-  public String getNotes() {
-    return notes;
-  }
-
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-  public MusicalPiece getMusicalPiece() {
-    return musicalPiece;
-  }
-
-  public void setMusicalPiece(MusicalPiece musicalPiece) {
-    this.musicalPiece = musicalPiece;
-  }
+  @JoinColumn(name = "piece_id")
+  private MusicalPiece piece;
 }

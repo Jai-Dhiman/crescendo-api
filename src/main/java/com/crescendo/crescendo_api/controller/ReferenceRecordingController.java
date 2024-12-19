@@ -1,55 +1,36 @@
 package com.crescendo.crescendo_api.controller;
 
-import com.crescendo.crescendo_api.dto.ReferenceRecordingDTO;
+import com.crescendo.crescendo_api.model.ReferenceRecording;
 import com.crescendo.crescendo_api.service.ReferenceRecordingService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reference-recordings")
+@RequestMapping("/api/pieces/{pieceId}/references")
+@RequiredArgsConstructor
 public class ReferenceRecordingController {
   private final ReferenceRecordingService referenceRecordingService;
 
-  public ReferenceRecordingController(ReferenceRecordingService referenceRecordingService) {
-    this.referenceRecordingService = referenceRecordingService;
+  @GetMapping
+  public ResponseEntity<List<ReferenceRecording>> getReferencesByPiece(@PathVariable Long pieceId) {
+    return ResponseEntity.ok(referenceRecordingService.getReferencesByPieceId(pieceId));
   }
 
   @PostMapping
-  public ResponseEntity<ReferenceRecordingDTO> createReferenceRecording(
-      @RequestBody ReferenceRecordingDTO referenceRecordingDTO) {
-    return ResponseEntity.ok(referenceRecordingService.createReferenceRecording(referenceRecordingDTO));
+  public ResponseEntity<ReferenceRecording> createReference(
+      @PathVariable Long pieceId,
+      @RequestBody ReferenceRecording reference) {
+    return ResponseEntity.ok(referenceRecordingService.createReference(pieceId, reference));
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<ReferenceRecordingDTO> getReferenceRecording(@PathVariable Long id) {
-    return ResponseEntity.ok(referenceRecordingService.getReferenceRecording(id));
-  }
-
-  @GetMapping
-  public ResponseEntity<List<ReferenceRecordingDTO>> getAllReferenceRecordings() {
-    return ResponseEntity.ok(referenceRecordingService.getAllReferenceRecordings());
-  }
-
-  @GetMapping("/by-piece/{musicalPieceId}")
-  public ResponseEntity<List<ReferenceRecordingDTO>> getReferenceRecordingsByMusicalPiece(
-      @PathVariable Long musicalPieceId) {
-    return ResponseEntity.ok(
-        referenceRecordingService.getReferenceRecordingsByMusicalPiece(musicalPieceId));
-  }
-
-  @PutMapping("/{id}")
-  public ResponseEntity<ReferenceRecordingDTO> updateReferenceRecording(
-      @PathVariable Long id,
-      @RequestBody ReferenceRecordingDTO referenceRecordingDTO) {
-    return ResponseEntity.ok(
-        referenceRecordingService.updateReferenceRecording(id, referenceRecordingDTO));
-  }
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteReferenceRecording(@PathVariable Long id) {
-    referenceRecordingService.deleteReferenceRecording(id);
+  @DeleteMapping("/{referenceId}")
+  public ResponseEntity<Void> deleteReference(
+      @PathVariable Long pieceId,
+      @PathVariable Long referenceId) {
+    referenceRecordingService.deleteReference(pieceId, referenceId);
     return ResponseEntity.noContent().build();
   }
 }

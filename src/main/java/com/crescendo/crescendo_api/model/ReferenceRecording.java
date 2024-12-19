@@ -1,75 +1,20 @@
 package com.crescendo.crescendo_api.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @Entity
-@Table(name = "reference_recordings")
+@NoArgsConstructor
 public class ReferenceRecording {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  @Column(name = "spotify_track_id", nullable = false)
   private String spotifyTrackId;
-
-  @Column(nullable = false)
   private String artistName;
-
-  @Column(nullable = false)
-  private String recordingTitle;
-
-  @Column(columnDefinition = "TEXT")
-  private String notes;
-
+  private String title;
   @ManyToOne
-  @JoinColumn(name = "musical_piece_id", nullable = false)
-  private MusicalPiece musicalPiece;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getSpotifyTrackId() {
-    return spotifyTrackId;
-  }
-
-  public void setSpotifyTrackId(String spotifyTrackId) {
-    this.spotifyTrackId = spotifyTrackId;
-  }
-
-  public String getArtistName() {
-    return artistName;
-  }
-
-  public void setArtistName(String artistName) {
-    this.artistName = artistName;
-  }
-
-  public String getRecordingTitle() {
-    return recordingTitle;
-  }
-
-  public void setRecordingTitle(String recordingTitle) {
-    this.recordingTitle = recordingTitle;
-  }
-
-  public String getNotes() {
-    return notes;
-  }
-
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-  public MusicalPiece getMusicalPiece() {
-    return musicalPiece;
-  }
-
-  public void setMusicalPiece(MusicalPiece musicalPiece) {
-    this.musicalPiece = musicalPiece;
-  }
+  @JoinColumn(name = "piece_id")
+  private MusicalPiece piece;
 }
