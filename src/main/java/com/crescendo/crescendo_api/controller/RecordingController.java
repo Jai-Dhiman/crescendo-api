@@ -2,12 +2,16 @@ package com.crescendo.crescendo_api.controller;
 
 import com.crescendo.crescendo_api.model.Recording;
 import com.crescendo.crescendo_api.service.RecordingService;
+import com.crescendo.crescendo_api.service.AudioProcessingService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +57,8 @@ public class RecordingController {
     recordingService.deleteRecording(pieceId, recordingId);
     return ResponseEntity.noContent().build();
   }
+
+  private AudioProcessingService audioProcessingService;
 
   @PostMapping("/{recordingId}/audio")
   public ResponseEntity<Recording> uploadAudio(
